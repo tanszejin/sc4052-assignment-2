@@ -10,10 +10,10 @@ def pagerank(G, c=0.5, max_iter=10):
     pages = list(G.nodes())
     N = len(pages)
     adj = dict(G.adjacency())
-    out_degree = {page: 1.0 if len(adj[page]) == 0 else len(adj[page]) for page in pages}
+    out_degree = {page : 1.0 if len(adj[page]) == 0 else len(adj[page]) for page in pages}
 
 
-    pr = {page: 1.0 / N for page in pages}
+    pr = {page : 1.0 / N for page in pages}
     for _ in range(max_iter):
         pr_old = pr.copy()
         for page in pages:
@@ -21,6 +21,9 @@ def pagerank(G, c=0.5, max_iter=10):
 
 
         print("Change:", np.linalg.norm(np.array(list(pr.values())) - np.array(list(pr_old.values())), 1))
+    
+    sum = sum(pr.values())
+    pr = {page : value / sum for page, value in pr.items()}
 
     return pr
 
@@ -43,7 +46,8 @@ def pagerank_matrix(G, c=0.5, max_iter=10):
         pr = c * M.dot(pr_old) + (1 - c) / N
         print("Change:", np.linalg.norm(pr - pr_old, 1))
 
-    return {pages[i]: pr[i] for i in range(N)}
+    pr = pr / pr.sum()
+    return {pages[i] : pr[i] for i in range(N)}
 
 
 def pagerank_closed_form(G, c=0.5):
@@ -68,7 +72,8 @@ def pagerank_closed_form(G, c=0.5):
     b = (1 - c) / N * np.ones(N).T
 
     pr = np.linalg.inv(A).dot(b)
-    return {pages[i]: pr[i] for i in range(N)}
+    pr = pr / pr.sum()  
+    return {pages[i] : pr[i] for i in range(N)}
 
 if __name__ == "__main__":
     dataset = "toy_dataset.txt"
@@ -85,13 +90,13 @@ if __name__ == "__main__":
 
     pr = pagerank_matrix(G)
     print("PageRank:", pr)
-    print("Sum of PageRank values:", sum(pr.values())) 
+    # print("Sum of PageRank values:", sum(pr.values())) 
 
     # the closed form solution requires the use of matrix operations
     # the 800K dataset is too large to be converted to matrix form
     pr_closed_form = pagerank_closed_form(G)
     print("Closed-form PageRank:", pr_closed_form)
-    print("Sum of closed-form PageRank values:", sum(pr_closed_form.values()))
+    # print("Sum of closed-form PageRank values:", sum(pr_closed_form.values()))
 
 
 
