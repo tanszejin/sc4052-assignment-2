@@ -22,8 +22,8 @@ def pagerank(G, c=0.5, max_iter=10):
 
         print("Change:", np.linalg.norm(np.array(list(pr.values())) - np.array(list(pr_old.values())), 1))
     
-    sum = sum(pr.values())
-    pr = {page : value / sum for page, value in pr.items()}
+    total = sum(pr.values())
+    pr = {page : value / total for page, value in pr.items()}
 
     return pr
 
