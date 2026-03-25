@@ -4,7 +4,8 @@
 
 `illustration.py`: for plotting graphs of PageRank distribution across nodes  
 `pagerank.py`: contains the pagerank implementation, uses the `networkx` library for graphs  
-`toy_dataset.txt`: sample dataset of pages, obtained from https://hunglvosu.github.io/posts/2020/07/PA3/
+`toy_dataset.txt`: sample dataset of pages, obtained from https://hunglvosu.github.io/posts/2020/07/PA3/  
+The web-Google datasets are not included due to their large size, but the implementation works with both.
 
 ### GraphRAG
 
