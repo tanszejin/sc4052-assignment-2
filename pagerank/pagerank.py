@@ -88,7 +88,7 @@ if __name__ == "__main__":
             parts = line.strip().split()
             G.add_edge(parts[0], parts[1])
 
-    pr = pagerank_matrix(G)
+    pr = pagerank(G)
     print("PageRank:", pr)
     # print("Sum of PageRank values:", sum(pr.values())) 
 
