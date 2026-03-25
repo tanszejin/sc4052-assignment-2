@@ -6,7 +6,7 @@ if __name__ == "__main__":
     API_KEY = os.environ.get("GOOGLE_API_KEY")
 
     kg = KGGen(
-    model="gemini/gemini-2.5-flash",  # Default model
+    model="gemini/gemini-2.5-flash", 
     temperature=0.0,        # Default temperature
     api_key=API_KEY  # Optional if set in environment or using a local model
     )
